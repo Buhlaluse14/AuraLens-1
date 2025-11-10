@@ -1,0 +1,5 @@
+{
+  "name": "AuraLens",
+  "description": "An interactive sentiment analysis dashboard that analyzes text from various sources (direct input, TXT, or CSV files) and displays the results with insightful charts and metrics.",
+  "requestFramePermissions": []
+}
