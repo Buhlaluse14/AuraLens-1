@@ -142,6 +142,16 @@ export const analyzeText = async (text: string, model: ModelName): Promise<Analy
 };
 
 export const analyzeBatch = async (texts: string[], model: ModelName): Promise<AnalysisResult[]> => {
-    const results: Promise<AnalysisResult>[] = texts.map(text => analyzeText(text, model));
-    return Promise.all(results);
+    // This sequentialResults array will hold our results.
+    const sequentialResults: AnalysisResult[] = [];
+    
+    // We use a for...of loop, which respects the 'await' keyword.
+    for (const text of texts) {
+      // It will 'await' the result of one call before starting the next.
+      const result = await analyzeText(text, model);
+      sequentialResults.push(result);
+    }
+    
+    // Return the results once all calls are complete.
+    return sequentialResults;
 };
